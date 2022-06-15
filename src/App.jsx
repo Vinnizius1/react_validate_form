@@ -13,6 +13,7 @@ function App() {
     confirmPassword: "",
   });
 
+  /* INPUTS */
   const inputs = [
     {
       id: 1,
@@ -53,19 +54,29 @@ function App() {
 
   // console.log('re-rendered');
 
+  /* HANDLESUBMIT */
   const handleSubmit = (e) => {
     e.preventDefault();
     // const data = new FormData(e.target);
     // console.log(Object.fromEntries(data));
+    console.log(values);
   };
 
+  /* ONCHANGE */
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  /* RETURN */
+  // console.log(values);
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
-        <FormInput name="username" placeholder="Username" />
+        {inputs.map((input) => (
+          <FormInput key={input.id} {...input} value={values[input]} onChange={onChange} />
+        ))}
         {/* <FormInput name="email" placeholder="Email"/>
-        <FormInput name="fullname" placeholder="Full Name"/>
-        <FormInput name="else" placeholder="Else"/> */}
+        <FormInput name="fullname" placeholder="Full Name"/> */}
         <button>Submit</button>
       </form>
     </div>
